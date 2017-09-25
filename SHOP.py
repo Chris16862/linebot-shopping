@@ -55,7 +55,7 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        userid = event.source.userId
+        print (event)
         if event.message.text=="我要賣東西":
             line_bot_api.push_message(
                 userid,
