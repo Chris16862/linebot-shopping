@@ -56,12 +56,14 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         print (event)
+        """
         if event.message.text=="我要賣東西":
             line_bot_api.push_message(
                 userid,
                 TextSendMessage(text="請問需要賣甚麼東西呢?")
             )
         return 'OK'
+        """
 
 
 if __name__ == "__main__":
