@@ -55,7 +55,7 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-    if event.message.text="我要賣東西":
+    if event.message.text=="我要賣東西":
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請問需要賣甚麼東西呢?")
