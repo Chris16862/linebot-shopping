@@ -35,6 +35,7 @@ parser = WebhookParser(channel_secret)
 @app.route("/callback", methods=['POST'])
 def callback():
     tags=None
+    global tags
     mo_name=[]
     mo_price=[]
     mo_style=[]
@@ -55,7 +56,6 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         print(tags)
-        global tags
         if tags=="商品名":
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
