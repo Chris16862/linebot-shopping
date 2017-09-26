@@ -36,7 +36,6 @@ def callback():
     mo_style=[]
     mo_intro=[]
     signature = request.headers['X-Line-Signature']
-
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
@@ -50,9 +49,9 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        f = open('set.txt','r')
+        f = open('set.txt','r',encoding = 'UTF-8')
         tags=f.read()
-        if tags==1:
+        if tags==str(1):
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
