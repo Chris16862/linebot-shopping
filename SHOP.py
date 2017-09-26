@@ -87,7 +87,7 @@ def callback():
             mo_intro.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+mo_name+"\n價錢:"+mo_price+"\n規格:"+mo_style+"\n介紹及優惠:"+mo_intro)
+            TextSendMessage(text=str("輸入完畢，請確認內容:\n商品名:"+mo_name+"\n價錢:"+mo_price+"\n規格:"+mo_style+"\n介紹及優惠:"+mo_intro)
             )
         
             
