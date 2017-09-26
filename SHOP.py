@@ -50,6 +50,7 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         f = open('set.txt','r',encoding = 'UTF-8')
+        tags=f.read()
         if event.message.text=="我要賣東西":
             line_bot_api.reply_message(
             event.reply_token,
@@ -57,7 +58,6 @@ def callback():
             )
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("1")
-        tags=f.read()
         print(tags)
         if tags=="1":
             mo_name.append(event.message.text)
