@@ -54,16 +54,20 @@ def callback():
            line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入你要賣的東西(依照以下範例):")
+        	)
+           line_bot_api.reply_message(
+            event.reply_token,
             TextSendMessage(text="依序打入:商品名 規格 價格 介紹")
+        	)
+           line_bot_api.reply_message(
+            event.reply_token,
             TextSendMessage(text="範例:蘋果 200g 20元 新鮮甜美的蘋果喔!!")
-        )
+        	) 
         
         com_info=event.message.text
         print(com_info)
         	
-
-
-    return 'OK'
+   	return 'OK'
    
 
 
