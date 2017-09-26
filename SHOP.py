@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-import jieba
+#import jieba
 import os
 import sys
 from argparse import ArgumentParser
@@ -17,7 +17,7 @@ from linebot.models import (
 )
 
 app = Flask(__name__)
-jieba.load_userdict('moe.dict')
+#jieba.load_userdict('moe.dict')
 
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
