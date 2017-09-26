@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 #import pandas as pd 
 import os
 import sys
-import count.py
+os.system("python count.py")
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -15,8 +15,6 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-global tags
-tags=None
 app = Flask(__name__)
 #jieba.load_userdict('moe.dict')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -34,7 +32,6 @@ parser = WebhookParser(channel_secret)
 
 @app.route("/callback", methods=['POST'])
 def callback():
-    global tags
     mo_name=[]
     mo_price=[]
     mo_style=[]
