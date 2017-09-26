@@ -52,32 +52,32 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
    		if event.message.text=="我要賣東西":
-   			  buttons_template = TemplateSendMessage(
+   			buttons_template = TemplateSendMessage(
             	alt_text='開始玩 template',
-            	template=ButtonsTemplate(
-                title='選擇類型',
-                text='請選擇',
-                thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
-                actions=[
-                    MessageTemplateAction(
-                        label='商品名',
-                        text='商品名'
-                    ),
-                    MessageTemplateAction(
-                        label='價錢',
-                        text='價錢'
-                    ),
-                    MessageTemplateAction(
-                        label='規格',
-                        text='規格'
-                    ),
-                    MessageTemplateAction(
-                        label='介紹',
-                        text='介紹'
-                    )
-                ]
+                template=ButtonsTemplate(
+                    title='選擇類型',
+                    text='請選擇',
+                    thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
+                    actions=[
+                        MessageTemplateAction(
+                            label='商品名',
+                            text='商品名'
+                        ),
+                        MessageTemplateAction(
+                            label='價錢',
+                            text='價錢'
+                        ),
+                        MessageTemplateAction(
+                            label='規格',
+                            text='規格'
+                        ),
+                        MessageTemplateAction(
+                            label='介紹',
+                            text='介紹'
+                        )
+                    ]
+                )
             )
-        )
 	line_bot_api.reply_message(event.reply_token, buttons_template)
 
 
