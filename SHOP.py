@@ -87,7 +87,6 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-
             tags="商品名"
         
             
