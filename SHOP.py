@@ -61,7 +61,6 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入價錢:")
             )
-            global tags
             tags="價錢"
         if tags=="價錢":
             mo_price.append(event.message.text)
@@ -69,7 +68,6 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入規格:")
             )
-            global tags
             tags="規格"
         if tags=="規格":
             mo_style.append(event.message.text)
@@ -77,7 +75,6 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
-            global tags
             tags="介紹"
         if tags=="介紹":
             mo_intro.append(event.message.text)
@@ -91,8 +88,9 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-            global tags
+
             tags="商品名"
+            return tags
             
     
     return 'OK'
