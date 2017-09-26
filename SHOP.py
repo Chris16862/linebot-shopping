@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
 #import jieba
-from pandas import Series, DataFrame
-import pandas as pd 
+#from pandas import Series, DataFrame
+#import pandas as pd 
 import os
 import sys
 from argparse import ArgumentParser
