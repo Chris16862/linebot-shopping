@@ -34,10 +34,10 @@ parser = WebhookParser(channel_secret)
 
 @app.route("/callback", methods=['POST'])
 def callback():
-    mo_name=None
-    mo_price=None
-    mo_style=None
-    mo_intro=None
+    mo_name=[]
+    mo_price=[]
+    mo_style=[]
+    mo_intro=[]
     signature = request.headers['X-Line-Signature']
 
     body = request.get_data(as_text=True)
@@ -54,32 +54,28 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         if tags=="商品名":
-            global mo_name
-            mo_name=event.message.text
+            mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入價錢:")
             )
-            tags='價錢'
-        if tags=='價錢':
-            global mo_price
-            mo_price=event.message.text
+            tags="價錢"
+        if tags=="價錢":
+            mo_price.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入規格:")
             )
-            tags='規格'
-        if tags=='規格':
-            global mo_style
-            mo_style=event.message.text
+            tags="規格"
+        if tags=="規格":
+            mo_style.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
-            tags='介紹'
-        if tags=='介紹':
-            global mo_intro
-            mo_intro=event.message.text
+            tags="介紹"
+        if tags=="介紹":
+            mo_intro.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+mo_name+"\n價錢:"+mo_price+"\n規格:"+mo_style+"\n介紹及優惠:"+mo_intro)
