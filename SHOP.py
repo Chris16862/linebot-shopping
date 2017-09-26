@@ -14,7 +14,6 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-global tags
 #jieba.load_userdict('moe.dict')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
