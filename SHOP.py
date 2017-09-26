@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 #import pandas as pd 
 import os
 import sys
-os.system("python count.py")
+import count.py
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -15,6 +15,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
+tags=
 app = Flask(__name__)
 #jieba.load_userdict('moe.dict')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -32,6 +33,7 @@ parser = WebhookParser(channel_secret)
 
 @app.route("/callback", methods=['POST'])
 def callback():
+    tags
     mo_name=[]
     mo_price=[]
     mo_style=[]
@@ -51,28 +53,33 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        if count()==1:
+        f = open('set.txt','r')
+        tags=f.read()
+        if tags==1:
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入價錢:")
             )
-            return 2
-        if count()==2:
+            f = open('set.txt','w')
+            f.write(2)
+        if tags==2:
             mo_price.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入規格:")
             )
-            return 3
-        if count()==3:
+            f = open('set.txt','w')
+            f.write(3)
+        if tags==3:
             mo_style.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
-            return 4
-        if count()==4:
+            f = open('set.txt','w')
+            f.write(4)
+        if tags==4:
             mo_intro.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
@@ -84,8 +91,10 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-            return 1
+            f = open('set.txt','w')
+            f.write(1)
         
+            
             
     
     return 'OK'
