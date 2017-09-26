@@ -1,3 +1,5 @@
+global tags
+tags=None
 from __future__ import unicode_literals
 #import jieba
 #from pandas import Series, DataFrame
@@ -14,8 +16,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-global tags
-tags=None
+
 app = Flask(__name__)
 #jieba.load_userdict('moe.dict')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
