@@ -55,15 +55,23 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        print (event)
-        """
+   
         if event.message.text=="我要賣東西":
-            line_bot_api.push_message(
+           line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入商品名:")
+        )
+
+
+        if event.message.text=="我要買東西":
+        	line_bot_api.push_message(
                 userid,
-                TextSendMessage(text="請問需要賣甚麼東西呢?")
+                TextSendMessage(text="請問想買甚麼東西呢?(請輸入編號:)")
             )
+
+
         return 'OK'
-        """
+   
 
 
 if __name__ == "__main__":
