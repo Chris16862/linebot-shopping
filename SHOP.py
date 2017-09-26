@@ -50,6 +50,13 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         f = open('set.txt','r',encoding = 'UTF-8')
+        if event.message.text=="我要賣東西":
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入商品名:")
+            )
+            f = open('set.txt','w',encoding = 'UTF-8')
+            f.write("1")
         tags=f.read()
         if tags=="1":
             mo_name.append(event.message.text)
@@ -59,7 +66,6 @@ def callback():
             )
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("2")
-            f.close()
         if tags=="2":
             mo_price.append(event.message.text)
             line_bot_api.reply_message(
@@ -68,7 +74,6 @@ def callback():
             )
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("3")
-            f.close()
         if tags=="3":
             mo_style.append(event.message.text)
             line_bot_api.reply_message(
@@ -77,22 +82,12 @@ def callback():
             )
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("4")
-            f.close()
         if tags=="4":
             mo_intro.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+mo_name+"\n價錢:"+mo_price+"\n規格:"+mo_style+"\n介紹及優惠:"+mo_intro)
             )
-
-        if event.message.text=="我要賣東西":
-            line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="請輸入商品名:")
-            )
-            f = open('set.txt','w',encoding = 'UTF-8')
-            f.write("1")
-            f.close()
         
             
             
