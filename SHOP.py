@@ -1,5 +1,3 @@
-global tags
-tags=None
 from __future__ import unicode_literals
 #import jieba
 #from pandas import Series, DataFrame
@@ -16,8 +14,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
-app = Flask(__name__)
+global tags
 #jieba.load_userdict('moe.dict')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
@@ -34,7 +31,6 @@ parser = WebhookParser(channel_secret)
 
 @app.route("/callback", methods=['POST'])
 def callback():
-    global tags
     mo_name=[]
     mo_price=[]
     mo_style=[]
@@ -54,28 +50,32 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        print(tags)
+        f = open('set.txt','r')
+        tags=f.read()
         if tags=="商品名":
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入價錢:")
             )
-            tags="價錢"
+            f = open('set.txt','w')
+            f.write("價錢")
         if tags=="價錢":
             mo_price.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入規格:")
             )
-            tags="規格"
+            f = open('set.txt','w')
+            f.write("規格")
         if tags=="規格":
             mo_style.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
-            tags="介紹"
+            f = open('set.txt','w')
+            f.write("介紹")
         if tags=="介紹":
             mo_intro.append(event.message.text)
             line_bot_api.reply_message(
@@ -88,7 +88,8 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-            tags="商品名"
+            f = open('set.txt','w')
+            f.write("商品名")
         
             
     
