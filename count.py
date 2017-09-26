@@ -1,0 +1,12 @@
+import os
+import sys
+os.system("python shop.py")
+def count():
+	if callback()=1:
+		return 1
+	if callback()=2:
+		return 2
+	if callback()=3:
+		return 3
+	if callback()=4:
+		return 4

@@ -51,28 +51,28 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        if count.count()==1:
+        if count()==1:
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入價錢:")
             )
             return 2
-        if count.count()==2:
+        if count()==2:
             mo_price.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入規格:")
             )
             return 3
-        if count.count()==3:
+        if count()==3:
             mo_style.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
             return 4
-        if count.count()==4:
+        if count()==4:
             mo_intro.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
