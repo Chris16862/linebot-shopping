@@ -15,7 +15,6 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-tags=
 app = Flask(__name__)
 #jieba.load_userdict('moe.dict')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
