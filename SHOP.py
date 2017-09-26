@@ -34,7 +34,7 @@ parser = WebhookParser(channel_secret)
 
 @app.route("/callback", methods=['POST'])
 def callback():
-    tags=None
+    tags=0
     mo_name=[]
     mo_price=[]
     mo_style=[]
@@ -54,28 +54,28 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        if tags=="商品名":
+        if tags==1:
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入價錢:")
             )
-            tags="價錢"
-        if tags=="價錢":
+            tags=2
+        if tags==2:
             mo_price.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入規格:")
             )
-            tags="規格"
-        if tags=="規格":
+            tags=3
+        if tags==3:
             mo_style.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
-            tags="介紹"
-        if tags=="介紹":
+            tags=4
+        if tags==4:
             mo_intro.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
@@ -87,7 +87,7 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-            tags='商品名'
+            tags=1
             
     
     return 'OK'
