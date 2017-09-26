@@ -34,6 +34,7 @@ parser = WebhookParser(channel_secret)
 
 @app.route("/callback", methods=['POST'])
 def callback():
+    global tags
     mo_name=[]
     mo_price=[]
     mo_style=[]
@@ -49,7 +50,6 @@ def callback():
         abort(400)
 
     for event in events:
-        global tags
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
