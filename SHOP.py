@@ -54,6 +54,7 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
+        print(tags)
         if tags==1:
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
