@@ -49,6 +49,7 @@ def callback():
         abort(400)
 
     for event in events:
+        global tags
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
