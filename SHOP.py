@@ -14,8 +14,6 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-global tags
-tags=None
 app = Flask(__name__)
 #jieba.load_userdict('moe.dict')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -53,28 +51,32 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        print(tags)
+        f = open('set.txt','r')
+        tags=f.read()
         if tags=="商品名":
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入價錢:")
             )
-            tags="價錢"
+            f = open('set.txt','w')
+            f.write("價錢")
         if tags=="價錢":
             mo_price.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入規格:")
             )
-            tags="規格"
+            f = open('set.txt','w')
+            f.write("規格")
         if tags=="規格":
             mo_style.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
-            tags="介紹"
+            f = open('set.txt','w')
+            f.write("介紹")
         if tags=="介紹":
             mo_intro.append(event.message.text)
             line_bot_api.reply_message(
@@ -87,9 +89,8 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-            global tags
-            tags="商品名"
-        
+            f = open('set.txt','w')
+            f.write("商品名")
             
     
     return 'OK'
