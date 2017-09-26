@@ -53,17 +53,14 @@ def callback():
         if event.message.text=="我要賣東西":
            line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="請輸入商品名:")
+            TextSendMessage(text="請輸入你要賣的東西(依照以下範例):")
+            TextSendMessage(text="依序打入:商品名 規格 價格 介紹")
+            TextSendMessage(text="範例:蘋果 200g 20元 新鮮甜美的蘋果喔!!")
         )
-
-
-        if event.message.text=="我要買東西":
-        	line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="想買甚麼東西呢?")
-        )
-        	user_want=event.message.text
-        	print(user_want)
+        
+        com_info=event.message.text
+        print(com_info)
+        	
 
 
         return 'OK'
