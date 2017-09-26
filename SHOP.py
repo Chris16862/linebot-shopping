@@ -18,7 +18,8 @@ from linebot.models import *
 
 app = Flask(__name__)
 #jieba.load_userdict('moe.dict')
-
+global tags
+tags=None
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 if channel_secret is None:
@@ -35,7 +36,6 @@ parser = WebhookParser(channel_secret)
 @app.route("/callback", methods=['POST'])
 def callback():
     global tags
-    tags=None
     mo_name=[]
     mo_price=[]
     mo_style=[]
