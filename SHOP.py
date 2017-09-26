@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 #import pandas as pd 
 import os
 import sys
-import count.py
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -62,6 +61,7 @@ def callback():
             )
             f = open('set.txt','w')
             f.write(2)
+            f.close()
         if tags==2:
             mo_price.append(event.message.text)
             line_bot_api.reply_message(
@@ -70,6 +70,7 @@ def callback():
             )
             f = open('set.txt','w')
             f.write(3)
+            f.close()
         if tags==3:
             mo_style.append(event.message.text)
             line_bot_api.reply_message(
@@ -78,6 +79,7 @@ def callback():
             )
             f = open('set.txt','w')
             f.write(4)
+            f.close()
         if tags==4:
             mo_intro.append(event.message.text)
             line_bot_api.reply_message(
@@ -92,6 +94,7 @@ def callback():
             )
             f = open('set.txt','w')
             f.write(1)
+            f.close()
         
             
             
