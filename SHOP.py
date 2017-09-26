@@ -34,6 +34,10 @@ parser = WebhookParser(channel_secret)
 
 @app.route("/callback", methods=['POST'])
 def callback():
+    mo_name=None
+    mo_price=None
+    mo_style=None
+    mo_intro=None
     signature = request.headers['X-Line-Signature']
 
     body = request.get_data(as_text=True)
@@ -49,34 +53,46 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        if event.message.text=="我要賣東西":
-            buttons_template = TemplateSendMessage(
-                alt_text='開始玩 template',
-                template=ButtonsTemplate(
-                    title='選擇類型',
-                    text='請選擇',
-                    thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
-                    actions=[
-                        MessageTemplateAction(
-                            label='商品名',
-                            text='商品名'
-                        ),
-                        MessageTemplateAction(
-                            label='價錢',
-                            text='價錢'
-                        ),
-                        MessageTemplateAction(
-                            label='規格',
-                            text='規格'
-                        ),
-                        MessageTemplateAction(
-                            label='介紹',
-                            text='介紹'
-                        )
-                    ]
-                )
+        if tags=="商品名":
+            global mo_name
+            mo_name=event.message.text
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入價錢:")
             )
-    line_bot_api.reply_message(event.reply_token, buttons_template)
+            tags='價錢'
+        if tags='價錢':
+            global mo_price
+            mo_price=event.message.text
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入規格:")
+            )
+            tags='規格'
+        if tags='規格':
+            global mo_style
+            mo_style=event.message.text
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入介紹或優惠:")
+            )
+            tags='介紹'
+        if tags='介紹':
+            global mo_intro
+            mo_intro=event.message.text
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+mo_name+"\n價錢:"+mo_price+"\n規格:"+mo_style+"\n介紹及優惠:"+mo_intro)
+            )
+
+        if event.message.text=="我要賣東西":
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入商品名:")
+            )
+            tags='商品名'
+            
+    
     return 'OK'
    
 
