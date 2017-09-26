@@ -52,8 +52,7 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         f = open('set.txt','r',encoding = 'UTF-8')
-        tags=f.read()
-        if tags=="商品名":
+        if f.read()=="商品名":
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
@@ -61,7 +60,7 @@ def callback():
             )
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("價錢")
-        if tags=="價錢":
+        if f.read()=="價錢":
             mo_price.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
@@ -69,7 +68,7 @@ def callback():
             )
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("規格")
-        if tags=="規格":
+        if f.read()=="規格":
             mo_style.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
@@ -77,7 +76,7 @@ def callback():
             )
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("介紹")
-        if tags=="介紹":
+        if f.read()=="介紹":
             mo_intro.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
