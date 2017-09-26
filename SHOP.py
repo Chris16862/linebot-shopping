@@ -90,7 +90,7 @@ def callback():
 
 
 
-           ''' line_bot_api.reply_message(
+        ''' line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="請輸入商品名:")
             )   
