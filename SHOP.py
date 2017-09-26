@@ -34,6 +34,7 @@ parser = WebhookParser(channel_secret)
 
 @app.route("/callback", methods=['POST'])
 def callback():
+    tags=None
     global tags
     mo_name=[]
     mo_price=[]
