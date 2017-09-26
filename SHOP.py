@@ -61,7 +61,7 @@ def callback():
             TextSendMessage(text="請輸入價錢:")
             )
             tags='價錢'
-        if tags='價錢':
+        if tags=='價錢':
             global mo_price
             mo_price=event.message.text
             line_bot_api.reply_message(
@@ -69,7 +69,7 @@ def callback():
             TextSendMessage(text="請輸入規格:")
             )
             tags='規格'
-        if tags='規格':
+        if tags=='規格':
             global mo_style
             mo_style=event.message.text
             line_bot_api.reply_message(
@@ -77,7 +77,7 @@ def callback():
             TextSendMessage(text="請輸入介紹或優惠:")
             )
             tags='介紹'
-        if tags='介紹':
+        if tags=='介紹':
             global mo_intro
             mo_intro=event.message.text
             line_bot_api.reply_message(
