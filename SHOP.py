@@ -53,8 +53,8 @@ def callback():
             continue
    		if event.message.text=="我要賣東西":
    			  buttons_template = TemplateSendMessage(
-            alt_text='開始玩 template',
-            template=ButtonsTemplate(
+            	alt_text='開始玩 template',
+            	template=ButtonsTemplate(
                 title='選擇類型',
                 text='請選擇',
                 thumbnail_image_url='https://i.imgur.com/xQF5dZT.jpg',
