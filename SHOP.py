@@ -243,24 +243,32 @@ def callback():
                 )
             elif event.message.text=="商品名" :
                 s = "modify_name"
+                db.execute("UPDATE sell_list SET status='{}' WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
+                con.commit()
                 line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="請輸入商品名:")
                 )
             elif event.message.text=="單價" :
                 s = "modify_price"
+                db.execute("UPDATE sell_list SET status='{}' WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
+                con.commit()
                 line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="請輸入單價:")
                 )
             elif event.message.text=="數量" :
                 s = "modify_amount"
+                db.execute("UPDATE sell_list SET status='{}' WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
+                con.commit()
                 line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="請輸入數量:")
                 )
             elif event.message.text=="介紹及優惠":
                 s = "modify_intro"
+                db.execute("UPDATE sell_list SET status='{}' WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
+                con.commit()
                 line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text="請輸入介紹及優惠:")
