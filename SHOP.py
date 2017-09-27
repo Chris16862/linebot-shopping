@@ -53,7 +53,7 @@ def callback():
             )
         elif status=="enter_name":
             s = "enter_price"
-            db.execute("UPDATE sell_list SET name='{}',status='{}' WHERE status='enter_name' and userid='{}'".format(event.message.text, s, userid))
+            db.execute("UPDATE sell_list SET name='%s',status='%s' WHERE status='enter_name' and userid='%s'",(event.message.text, s, userid))
             con.commit()
             line_bot_api.reply_message(
             event.reply_token,
