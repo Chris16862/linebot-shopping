@@ -44,7 +44,7 @@ def callback():
         status = db.fetchall()
         if event.message.text=="我要賣東西" and not status :
             s = "enter_name"
-            db.execute("INSERT INTO sell_list (userid, status) VALUES ({}, {})".format(userid, s))
+            db.execute("INSERT INTO sell_list (userid, status) VALUES (%s, %s)",(userid, s))
             db.commit()
             line_bot_api.reply_message(
             event.reply_token,
