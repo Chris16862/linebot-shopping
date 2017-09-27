@@ -1,3 +1,4 @@
+# -*- encoding: utf8 -*-
 from __future__ import unicode_literals
 import os
 import sys
@@ -52,7 +53,7 @@ def callback():
             )
         elif status=="enter_name":
             s = "enter_price"
-            db.execute("UPDATE sell_list(name,status) VALUES ({},{}) WHERE status='enter_name' and userid='{}'".format(event.message.text, s, userid))
+            db.execute("UPDATE sell_list SET name='{}',status='{}' WHERE status='enter_name' and userid='{}'".format(event.message.text, s, userid))
             con.commit()
             line_bot_api.reply_message(
             event.reply_token,
