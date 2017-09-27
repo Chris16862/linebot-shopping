@@ -102,10 +102,10 @@ def callback():
                 )
             )
         elif status[0][0]=="modify_name":
-            db.execute("SELECT price,amount,intro FROM sell_list WHERE status='enter_intro' and userid='{}'".format(userid))
+            db.execute("SELECT price,amount,intro FROM sell_list WHERE status='modify_name' and userid='{}'".format(userid))
             data = db.fetchall()
             s = "modify"
-            SQL = "UPDATE sell_list SET name='{}',status='{}' WHERE status='enter_name' and userid='{}';".format(event.message.text, s, userid)
+            SQL = "UPDATE sell_list SET name='{}',status='{}' WHERE status='modify_name' and userid='{}';".format(event.message.text, s, userid)
             db.execute(SQL)
             con.commit()
             line_bot_api.reply_message(
@@ -128,10 +128,10 @@ def callback():
                 )
             )
         elif status[0][0]=="modify_price":
-            db.execute("SELECT name,amount,intro FROM sell_list WHERE status='enter_intro' and userid='{}'".format(userid))
+            db.execute("SELECT name,amount,intro FROM sell_list WHERE status='modify_price' and userid='{}'".format(userid))
             data = db.fetchall()
             s = "modify"
-            db.execute("UPDATE sell_list SET price={},status='{}' WHERE status='enter_price' and userid='{}'".format(int(event.message.text), s, userid))
+            db.execute("UPDATE sell_list SET price={},status='{}' WHERE status='modify_price' and userid='{}'".format(int(event.message.text), s, userid))
             con.commit()
             line_bot_api.reply_message(
             event.reply_token,
@@ -153,10 +153,10 @@ def callback():
                 )
             )
         elif status[0][0]=="modify_amount":
-            db.execute("SELECT name,price,intro FROM sell_list WHERE status='enter_intro' and userid='{}'".format(userid))
+            db.execute("SELECT name,price,intro FROM sell_list WHERE status='modify_amount' and userid='{}'".format(userid))
             data = db.fetchall()
             s = "modify"
-            db.execute("UPDATE sell_list SET amount={},status='{}' WHERE status='enter_amount' and userid='{}'".format(int(event.message.text), s, userid))
+            db.execute("UPDATE sell_list SET amount={},status='{}' WHERE status='modify_amount' and userid='{}'".format(int(event.message.text), s, userid))
             con.commit()
             line_bot_api.reply_message(
             event.reply_token,
@@ -178,10 +178,10 @@ def callback():
                 )
             )
         elif status[0][0]=="modify_intro":
-            db.execute("SELECT name,price,amount FROM sell_list WHERE status='enter_intro' and userid='{}'".format(userid))
+            db.execute("SELECT name,price,amount FROM sell_list WHERE status='modify_intro' and userid='{}'".format(userid))
             data = db.fetchall()
             s = "modify"
-            db.execute("UPDATE sell_list SET intro='{}',status='{}' WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
+            db.execute("UPDATE sell_list SET intro='{}',status='{}' WHERE status='modify_intro' and userid='{}'".format(event.message.text, s, userid))
             con.commit()
             line_bot_api.reply_message(
             event.reply_token,
