@@ -29,6 +29,7 @@ line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 data = {}
 test = 1
+
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
@@ -42,11 +43,11 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        print (test)
-        test = 0
         print (event)
         print ("------------------------------")
         print (data)
+        print (test)
+        test = 0
         tags = "0"
         if event.message.text=="我要賣東西":
             line_bot_api.reply_message(
