@@ -42,6 +42,8 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
+        print (event)
+        print ("------------------------------")
         print (data)
         tags = "0"
         if event.message.text=="我要賣東西":
