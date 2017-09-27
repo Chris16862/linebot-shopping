@@ -86,9 +86,25 @@ def callback():
             print (data)
             line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+data[0][0]+"\n價錢:"+str(data[0][1])+"\n數量:"+str(data[0][2])+"\n介紹及優惠:"+event.message.text)
+            TemplateSendMessage(
+                alt_text='Confirm template',
+                template=ConfirmTemplate(
+                    text="輸入完畢，請確認內容是否需要更改\n商品名:"+data[0][0]+"\n價錢:"+str(data[0][1])+"\n數量:"+str(data[0][2])+"\n介紹及優惠:"+event.message.text,
+                    actions=[
+                    MessageTemplateAction(
+                        label='Yes',
+                        text='Yes',
+                        ),
+                    MessageTemplateAction(
+                        label='No',
+                        text='No'
+                        )
+                    ]
+                    )
+                )
             )
-            
+         elif status[0][0]=="modify" :
+
     return 'OK'
    
 
