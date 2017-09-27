@@ -44,7 +44,7 @@ def callback():
         status = db.fetchall()
         if event.message.text=="我要賣東西" and not status :
             s = "enter_name"
-            db.execute("INSERT INTO sell_list(userid, status) VALUES({}, {})".format(userid, s))
+            db.execute("INSERT INTO sell_list (userid, status) VALUES ({}, {})".format(userid, s))
             db.commit()
             line_bot_api.reply_message(
             event.reply_token,
@@ -52,7 +52,7 @@ def callback():
             )
         elif status=="enter_name":
             s = "enter_price"
-            db.execute("UPDATE sell_list(name,status) VALUES({},{}) WHERE status='enter_name' and userid='{}'".format(event.message.text, s, userid))
+            db.execute("UPDATE sell_list(name,status) VALUES ({},{}) WHERE status='enter_name' and userid='{}'".format(event.message.text, s, userid))
             db.commit()
             line_bot_api.reply_message(
             event.reply_token,
@@ -60,7 +60,7 @@ def callback():
             )
         elif status=="enter_price":
             s = "enter_amount"
-            db.execute("UPDATE sell_list(price,status) VALUES({},{}) WHERE status='enter_price' and userid='{}'".format(int(event.message.text), s, userid))
+            db.execute("UPDATE sell_list(price,status) VALUES ({},{}) WHERE status='enter_price' and userid='{}'".format(int(event.message.text), s, userid))
             db.commit()
             line_bot_api.reply_message(
             event.reply_token,
@@ -76,7 +76,7 @@ def callback():
             )
         elif status=="enter_intro":
             s = "modify"
-            db.execute("UPDATE sell_list(intro,status) VALUES({},{}) WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
+            db.execute("UPDATE sell_list (intro,status) VALUES ({},{}) WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
             db.commit()
             db.execute("SELECT name,price,intro,amount FROM sell_list WHERE status='modify' and userid='{}'".format(userid))
             data = db.fetchall()
