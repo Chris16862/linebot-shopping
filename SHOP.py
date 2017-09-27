@@ -43,40 +43,40 @@ def callback():
         db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
         status = db.fetchall()
         if event.message.text=="我要賣東西" and not status :
-            s = "enter name"
+            s = "enter_name"
             db.execute("INSERT INTO sell_list(userid, status) VALUES({}, {})".format(userid, s))
             db.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-        elif status=="enter name":
-            s = "enter price"
-            db.execute("UPDATE sell_list(name,status) VALUES({},{}) WHERE status='enter name' and userid='{}'".format(event.message.text, s, userid))
+        elif status=="enter_name":
+            s = "enter_price"
+            db.execute("UPDATE sell_list(name,status) VALUES({},{}) WHERE status='enter_name' and userid='{}'".format(event.message.text, s, userid))
             db.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入單價:")
             )
-        elif status=="enter price":
-            s = "enter amount"
-            db.execute("UPDATE sell_list(price,status) VALUES({},{}) WHERE status='enter price' and userid='{}'".format(int(event.message.text), s, userid))
+        elif status=="enter_price":
+            s = "enter_amount"
+            db.execute("UPDATE sell_list(price,status) VALUES({},{}) WHERE status='enter_price' and userid='{}'".format(int(event.message.text), s, userid))
             db.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入提供數量:")
             )
-        elif status=="enter amount":
-            s = "enter intro"
-            db.execute("UPDATE sell_list(amount,status) VALUES({},{}) WHERE status='enter amount' and userid='{}'".format(int(event.message.text), s, userid))
+        elif status=="enter_amount":
+            s = "enter_intro"
+            db.execute("UPDATE sell_list(amount,status) VALUES({},{}) WHERE status='enter_amount' and userid='{}'".format(int(event.message.text), s, userid))
             db.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
-        elif status=="enter intro":
+        elif status=="enter_intro":
             s = "modify"
-            db.execute("UPDATE sell_list(intro,status) VALUES({},{}) WHERE status='enter amount' and userid='{}'".format(event.message.text, s, userid))
+            db.execute("UPDATE sell_list(intro,status) VALUES({},{}) WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
             db.commit()
             db.execute("SELECT name,price,intro,amount FROM sell_list WHERE status='modify' and userid='{}'".format(userid))
             data = db.fetchall()
