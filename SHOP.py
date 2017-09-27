@@ -28,7 +28,7 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 data = {}
-
+test = 1
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
@@ -42,7 +42,9 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        print (event.source.UserID)
+        print (test)
+        test = 0
+        print (event)
         print ("------------------------------")
         print (data)
         tags = "0"
