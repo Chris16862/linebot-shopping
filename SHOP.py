@@ -28,7 +28,6 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 data = {}
-test = 1
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -46,8 +45,6 @@ def callback():
         print (event.source.user_id)
         print ("------------------------------")
         print (data)
-        print (test)
-        test = 0
         tags = "0"
         if event.message.text=="我要賣東西":
             line_bot_api.reply_message(
@@ -56,7 +53,6 @@ def callback():
             )
             data.update({"userid": event.source.userid, "status" : 1})
         elif tags=="1":
-            mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入價錢:")
@@ -64,7 +60,6 @@ def callback():
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("2")
         if tags=="2":
-            mo_price.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入規格:")
@@ -72,7 +67,6 @@ def callback():
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("3")
         if tags=="3":
-            mo_style.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
@@ -80,7 +74,6 @@ def callback():
             f = open('set.txt','w',encoding = 'UTF-8')
             f.write("4")
         if tags=="4":
-            mo_intro.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+str(mo_name)+"\n價錢:"+str(mo_price)+"\n規格:"+str(mo_style)+"\n介紹及優惠:"+str(mo_intro))
