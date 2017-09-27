@@ -64,7 +64,7 @@ def callback():
         elif status[0][0]=="enter_price":
             s = "enter_amount"
             db.execute("UPDATE sell_list SET price={},status='{}' WHERE status='enter_price' and userid='{}'".format(int(event.message.text), s, userid))
-            db.commit()
+            con.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入提供數量:")
