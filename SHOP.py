@@ -86,7 +86,7 @@ def callback():
             print (data)
             line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+data[0]+"\n價錢:"+str(data[1])+"\n數量:"+str(data[2])+"\n介紹及優惠:"+event.message.text)
+            TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+data[0][0]+"\n價錢:"+str(data[0][1])+"\n數量:"+str(data[0][2])+"\n介紹及優惠:"+event.message.text)
             )
             
     return 'OK'
