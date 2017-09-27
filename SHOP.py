@@ -45,7 +45,7 @@ def callback():
         if event.message.text=="我要賣東西" and not status :
             s = "enter_name"
             db.execute("INSERT INTO sell_list (userid, status) VALUES (%s, %s)",(userid, s))
-            db.commit()
+            con.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
@@ -53,7 +53,7 @@ def callback():
         elif status=="enter_name":
             s = "enter_price"
             db.execute("UPDATE sell_list(name,status) VALUES ({},{}) WHERE status='enter_name' and userid='{}'".format(event.message.text, s, userid))
-            db.commit()
+            con.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入單價:")
@@ -69,7 +69,7 @@ def callback():
         elif status=="enter_amount":
             s = "enter_intro"
             db.execute("UPDATE sell_list(amount,status) VALUES({},{}) WHERE status='enter_amount' and userid='{}'".format(int(event.message.text), s, userid))
-            db.commit()
+            con.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
@@ -77,7 +77,7 @@ def callback():
         elif status=="enter_intro":
             s = "modify"
             db.execute("UPDATE sell_list (intro,status) VALUES ({},{}) WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
-            db.commit()
+            con.commit()
             db.execute("SELECT name,price,intro,amount FROM sell_list WHERE status='modify' and userid='{}'".format(userid))
             data = db.fetchall()
             line_bot_api.reply_message(
