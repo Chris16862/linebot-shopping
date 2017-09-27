@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 import os
 import sys
 from argparse import ArgumentParser
-import connection as con
+from connection import con
 from flask import Flask, request, abort
 from linebot import (
     LineBotApi, WebhookParser
