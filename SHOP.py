@@ -43,7 +43,7 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        print (event)
+        print (event.source.userId)
         print ("------------------------------")
         print (data)
         print (test)
