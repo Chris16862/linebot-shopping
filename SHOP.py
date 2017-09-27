@@ -51,7 +51,7 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-        elif status=="enter_name":
+        elif status[0]=="enter_name":
             s = "enter_price"
             SQL = "UPDATE sell_list SET name='{}',status='{}' WHERE status='enter_name' and userid='{}';".format(event.message.text, s, userid)
             print (SQL)
@@ -61,7 +61,7 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入單價:")
             )
-        elif status=="enter_price":
+        elif status[0]=="enter_price":
             s = "enter_amount"
             db.execute("UPDATE sell_list SET price={},status='{}' WHERE status='enter_price' and userid='{}'".format(int(event.message.text), s, userid))
             db.commit()
@@ -69,7 +69,7 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入提供數量:")
             )
-        elif status=="enter_amount":
+        elif status[0]=="enter_amount":
             s = "enter_intro"
             db.execute("UPDATE sell_list SET amount={},status='{}' WHERE status='enter_amount' and userid='{}'".format(int(event.message.text), s, userid))
             con.commit()
@@ -77,7 +77,7 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
-        elif status=="enter_intro":
+        elif status[0]=="enter_intro":
             s = "modify"
             db.execute("UPDATE sell_list SET intro='{}',status='{}' WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
             con.commit()
