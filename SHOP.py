@@ -43,6 +43,8 @@ def callback():
         userid = event.source.user_id
         db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
         status = db.fetchall()
+        print ("test")
+        print (status)
         if event.message.text=="我要賣東西" and not status :
             s = "enter_name"
             db.execute("INSERT INTO sell_list (userid, status) VALUES (%s, %s)",(userid, s))
