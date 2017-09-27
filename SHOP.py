@@ -181,7 +181,7 @@ def callback():
             db.execute("SELECT name,price,amount FROM sell_list WHERE status='enter_intro' and userid='{}'".format(userid))
             data = db.fetchall()
             s = "modify"
-            db.execute("UPDATE sell_list SET intro={},status='{}' WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
+            db.execute("UPDATE sell_list SET intro='{}',status='{}' WHERE status='enter_amount' and userid='{}'".format(event.message.text, s, userid))
             con.commit()
             line_bot_api.reply_message(
             event.reply_token,
