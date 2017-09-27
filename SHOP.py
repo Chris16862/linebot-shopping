@@ -188,7 +188,7 @@ def callback():
             TemplateSendMessage(
                 alt_text='Confirm template',
                 template=ConfirmTemplate(
-                    text="輸入完畢，請確認內容是否需要更改\n商品名:"+data[0][0]+"\n單價:"+str(data[0][1])+"\n數量:"+data[0][2]+"\n介紹及優惠:"+event.message.text,
+                    text="輸入完畢，請確認內容是否需要更改\n商品名:"+data[0][0]+"\n單價:"+str(data[0][1])+"\n數量:"+str(data[0][2])+"\n介紹及優惠:"+event.message.text,
                     actions=[
                     MessageTemplateAction(
                         label='Yes',
