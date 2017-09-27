@@ -51,7 +51,7 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-            data.update({"userid": event.SourceUser.userId, "status" : 1})
+            data.update({"userid": event.source.userid, "status" : 1})
         elif tags=="1":
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
