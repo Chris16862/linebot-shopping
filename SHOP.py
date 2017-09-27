@@ -221,7 +221,7 @@ def callback():
                         MessageTemplateAction(
                             label='數量',
                             text='數量'
-                            )
+                            ),
                         MessageTemplateAction(
                             label='介紹及優惠',
                             text='介紹及優惠'
