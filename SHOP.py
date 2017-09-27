@@ -43,13 +43,14 @@ def callback():
         if not isinstance(event.message, TextMessage):
             continue
         print (data)
+        tags = "0"
         if event.message.text=="我要賣東西":
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
             data.update({"userid": event.source.userId, "status" : 1})
-        elif =="1":
+        elif tags=="1":
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
