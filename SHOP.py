@@ -1,11 +1,8 @@
 from __future__ import unicode_literals
-#import jieba
-#from pandas import Series, DataFrame
-#import pandas as pd 
 import os
 import sys
 from argparse import ArgumentParser
-
+import connection as con
 from flask import Flask, request, abort
 from linebot import (
     LineBotApi, WebhookParser
@@ -27,7 +24,7 @@ if channel_access_token is None:
 
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
-data = {}
+db = con.cursor()
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -42,41 +39,50 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        print (event.source.user_id)
-        print ("------------------------------")
-        print (data)
-        tags = "0"
-        if event.message.text=="我要賣東西":
+        userid = event.source.user_id
+        db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
+        status = db.fetchall()
+        if event.message.text=="我要賣東西" and not status :
+            s = "enter name"
+            db.execute("INSERT INTO sell_list(userid, status) VALUES({}, {})".format(userid, s))
+            db.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-            data.update({"userid": event.source.userid, "status" : 1})
-        elif tags=="1":
+        elif status=="enter name":
+            s = "enter price"
+            db.execute("UPDATE sell_list(name,status) VALUES({},{}) WHERE status='enter name' and userid='{}'".format(event.message.text, s, userid))
+            db.commit()
             line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="請輸入價錢:")
+            TextSendMessage(text="請輸入單價:")
             )
-            f = open('set.txt','w',encoding = 'UTF-8')
-            f.write("2")
-        if tags=="2":
+        elif status=="enter price":
+            s = "enter amount"
+            db.execute("UPDATE sell_list(price,status) VALUES({},{}) WHERE status='enter price' and userid='{}'".format(int(event.message.text), s, userid))
+            db.commit()
             line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="請輸入規格:")
+            TextSendMessage(text="請輸入提供數量:")
             )
-            f = open('set.txt','w',encoding = 'UTF-8')
-            f.write("3")
-        if tags=="3":
+        elif status=="enter amount":
+            s = "enter intro"
+            db.execute("UPDATE sell_list(amount,status) VALUES({},{}) WHERE status='enter amount' and userid='{}'".format(int(event.message.text), s, userid))
+            db.commit()
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入介紹或優惠:")
             )
-            f = open('set.txt','w',encoding = 'UTF-8')
-            f.write("4")
-        if tags=="4":
+        elif status=="enter intro":
+            s = "modify"
+            db.execute("UPDATE sell_list(intro,status) VALUES({},{}) WHERE status='enter amount' and userid='{}'".format(event.message.text, s, userid))
+            db.commit()
+            db.execute("SELECT name,price,intro,amount FROM sell_list WHERE status='modify' and userid='{}'".format(userid))
+            data = db.fetchall()
             line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+str(mo_name)+"\n價錢:"+str(mo_price)+"\n規格:"+str(mo_style)+"\n介紹及優惠:"+str(mo_intro))
+            TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+data[0]+"\n價錢:"+str(data[1])+"\n數量:"+str(data[2])+"\n介紹及優惠:"+data[3])
             )
             
     return 'OK'
