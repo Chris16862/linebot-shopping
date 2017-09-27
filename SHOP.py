@@ -27,39 +27,29 @@ if channel_access_token is None:
 
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
-
+data = {}
 
 @app.route("/callback", methods=['POST'])
 def callback():
-    mo_name=[]
-    mo_price=[]
-    mo_style=[]
-    mo_intro=[]
     signature = request.headers['X-Line-Signature']
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-
     try:
         events = parser.parse(body, signature)
     except InvalidSignatureError:
         abort(400)
-
     for event in events:
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
             continue
+        print (data)
         if event.message.text=="我要賣東西":
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
-            f = open('set.txt','w',encoding = 'UTF-8')
-            f.write("1")
-        f = open('set.txt','r',encoding = 'UTF-8')
-        tags=f.read()
-        print(tags)
-        if tags=="1":
+            data.update({"userid": event.source.userId, "status" : 1})
+        elif =="1":
             mo_name.append(event.message.text)
             line_bot_api.reply_message(
             event.reply_token,
