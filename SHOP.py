@@ -103,8 +103,8 @@ def callback():
                     )
                 )
             )
-         elif status[0][0]=="modify" :
-
+        elif status[0][0]=="modify" :
+            pass
     return 'OK'
    
 
