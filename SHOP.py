@@ -83,6 +83,7 @@ def callback():
             con.commit()
             db.execute("SELECT name,price,intro,amount FROM sell_list WHERE status='modify' and userid='{}'".format(userid))
             data = db.fetchall()
+            print (data)
             line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="輸入完畢，請確認內容:\n商品名:"+data[0]+"\n價錢:"+str(data[1])+"\n數量:"+str(data[2])+"\n介紹及優惠:"+data[3])
