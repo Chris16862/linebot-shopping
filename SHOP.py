@@ -42,8 +42,8 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        print (event)
-        print ("------------------------------")
+        #print (event)
+        #print ("------------------------------")
         print (data)
         tags = "0"
         if event.message.text=="我要賣東西":
@@ -51,6 +51,7 @@ def callback():
             event.reply_token,
             TextSendMessage(text="請輸入商品名:")
             )
+            print (event)
             data.update({"userid": event.source.userId, "status" : 1})
         elif tags=="1":
             mo_name.append(event.message.text)
