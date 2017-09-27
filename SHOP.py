@@ -206,29 +206,33 @@ def callback():
             if event.message.text=='Yes' : 
                 line_bot_api.reply_message(
                     event.reply_token,
-                    ButtonsTemplate(
-                        title='List',
-                        text='請問需要更改哪個項目？',
-                        actions=[
-                        MessageTemplateAction(
-                            label='商品名',
-                            text='商品名',
-                            ),
-                        MessageTemplateAction(
-                            label='單價',
-                            text='單價'
-                            ),
-                        MessageTemplateAction(
-                            label='數量',
-                            text='數量'
-                            ),
-                        MessageTemplateAction(
-                            label='介紹及優惠',
-                            text='介紹及優惠'
+                    TemplateSendMessage(
+                        alt_text='Buttons template',
+                        template=ButtonsTemplate(
+                            title='List',
+                            text='請問需要更改哪個項目？',
+                            actions=[
+                            MessageTemplateAction(
+                                label='商品名',
+                                text='商品名',
+                                ),
+                            MessageTemplateAction(
+                                label='單價',
+                                text='單價'
+                                ),
+                            MessageTemplateAction(
+                                label='數量',
+                                text='數量'
+                                ),
+                            MessageTemplateAction(
+                                label='介紹及優惠',
+                                text='介紹及優惠'
+                                )
+                            ]
                             )
-                        ]
                         )
                     )
+                    
             elif event.message.text=='No' :
                 s = 'finish'
                 db.execute("UPDATE sell_list SET status='{}' WHERE status='enter_intro' and userid='{}'".format(s, userid))
