@@ -37,13 +37,16 @@ def callback():
         abort(400)
     for event in events:
         if isinstance(event, JoinEvent) :
-            print (event)
             db.execute("INSERT INTO group_list (grid) VALUES (%s)", (event.source.group_id,))
+            con.commit()
+        if isinstance(event, LeaveEvent):
+            db.execute("DELETE FROM group_list WHERE grid='{}'".fromat(event.source.group_id))
             con.commit()
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
             continue
+        print (event)
         userid = event.source.user_id
         db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
         status = db.fetchall()
