@@ -37,9 +37,9 @@ def callback():
         abort(400)
     for event in events:
         if isinstance(event, JoinEvent) :
-            print (event.source.group_id)
-            #db.execute("INSERT INTO group_list (grid) VALUES (%s)",(event.source.group_id))
-            #con.commit()
+            print (event)
+            db.execute("INSERT INTO group_list (grid) VALUES (%s)", (event.source.group_id,))
+            con.commit()
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
