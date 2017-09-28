@@ -254,7 +254,7 @@ def callback():
                 for i in ids :
                     line_bot_api.push_message(
                     i[0],
-                    TextSendMessage(text="商品標號#"+number+"\n"+intro)
+                    TextSendMessage(text="商品標號#"+str(number)+"\n"+intro)
                     )
             elif event.message.text=="商品名" :
                 s = "modify_name"
