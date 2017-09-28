@@ -36,11 +36,15 @@ def callback():
     except InvalidSignatureError:
         abort(400)
     for event in events:
+        if isinstance(event, JoinEvent) :
+            db.execute("INSERT INTO group_list(grid) VALUES (%s)",(event.source.group_id))
+            con.commit()
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
             continue
         userid = event.source.user_id
+        print (user_id)
         db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
         status = db.fetchall()
         if event.message.text=="我要賣東西" and not status :
