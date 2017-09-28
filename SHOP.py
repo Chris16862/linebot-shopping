@@ -40,7 +40,7 @@ def callback():
             db.execute("INSERT INTO group_list (grid) VALUES (%s)", (event.source.group_id,))
             con.commit()
         if isinstance(event, LeaveEvent):
-            db.execute("DELETE FROM group_list WHERE grid='{}'".fromat(event.source.group_id))
+            db.execute("DELETE FROM group_list WHERE grid='{}'".format(event.source.group_id))
             con.commit()
         if not isinstance(event, MessageEvent):
             continue
