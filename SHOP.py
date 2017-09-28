@@ -46,7 +46,8 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        print (event)
+        if not isinstance(event.source, SourceUser) :
+            continue
         userid = event.source.user_id
         db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
         status = db.fetchall()
