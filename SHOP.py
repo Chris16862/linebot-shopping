@@ -36,6 +36,9 @@ def callback():
     except InvalidSignatureError:
         abort(400)
     for event in events:
+        if isinstance(event.message, ImageMessage) :
+            message_content = line_bot_api.get_message_content(event.message.id)
+            print (message_content.iter_content())
         if isinstance(event, JoinEvent) :
             db.execute("INSERT INTO group_list (grid) VALUES (%s)", (event.source.group_id,))
             con.commit()
