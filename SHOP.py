@@ -49,10 +49,15 @@ def callback():
             continue
         if not isinstance(event.source, SourceUser) :
             continue
-        if event.message.text=="我要賣東西" :
+        db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
+        sell_status = db.fetchall()
+        if event.message.text=="我要賣東西" or sell_status :
             line_bot_api.reply_message(
                 event.reply_token,
-                s.get_reply(event)
+                s.get_reply(
+                    event,
+                    sell_status
+                    )
                 )
     return 'OK'
    

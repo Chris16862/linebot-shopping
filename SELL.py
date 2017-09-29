@@ -1,12 +1,9 @@
 from linebot.models import *
 from connection import con
 
-def get_reply(event) :
+def get_reply(event,status) :
     db = con.cursor()
     userid = event.source.user_id
-    reply = TextSendMessage()
-    db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
-    status = db.fetchall()
     if not status :
         s = "enter_name"
         db.execute("INSERT INTO sell_list (userid, status) VALUES (%s, %s)",(userid, s))
