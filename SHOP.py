@@ -38,7 +38,7 @@ def callback():
     for event in events:
         if isinstance(event.message, ImageMessage) :
             message_content = line_bot_api.get_message_content(event.message.id)
-            with open(set.txt, 'wb') as fd:
+            with open('set.txt', 'wb') as fd:
                 for chunk in message_content.iter_content():
                     fd.write(chunk)
             continue
