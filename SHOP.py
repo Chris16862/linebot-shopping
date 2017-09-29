@@ -13,6 +13,7 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import SELL as s
+
 app = Flask(__name__)
 #jieba.load_userdict('moe.dict')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
