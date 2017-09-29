@@ -1,8 +1,8 @@
 from linebot.models import *
 from connection import con
-db = con.cursor()
 
 def get_reply(event) :
+    db = con.cursor()
     userid = event.source.user_id
     reply = TextSendMessage()
     db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
@@ -205,3 +205,4 @@ def get_reply(event) :
             db.execute("UPDATE sell_list SET status='{}' WHERE status='modify' and userid='{}'".format(s, userid))
             con.commit()
             return TextSendMessage(text="請輸入介紹及優惠:")
+        db.close()
