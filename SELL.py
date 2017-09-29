@@ -1,9 +1,8 @@
 from linebot.models import *
 from connection import con
 
-def get_reply(event,status) :
+def get_reply(event, status, userid) :
     db = con.cursor()
-    userid = event.source.user_id
     if not status :
         s = "enter_name"
         db.execute("INSERT INTO sell_list (userid, status) VALUES (%s, %s)",(userid, s))
