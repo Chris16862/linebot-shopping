@@ -30,11 +30,11 @@ def get_reply(event) :
         client.set_missing_host_key_policy(AutoAddPolicy())
         client.connect(server, port, user, password)
         scp = SCPClient(client.get_transport())
-        scp.put('test.jpg','public_html/test.jpg')
-        scp.put('test-p.jpg','public_html/test-p.jpg')
+        scp.put('pic-o.jpg','public_html/pic.jpg')
+        scp.put('pic-p.jpg','public_html/pic-p.jpg')
         scp.close()
         return ImageSendMessage(
-                original_content_url="https://web-stu.tkucs.cc/404411240/test.jpg",
-                preview_image_url="https://web-stu.tkucs.cc/404411240/test-p.jpg"
+                original_content_url="https://web-stu.tkucs.cc/404411240/pic.jpg",
+                preview_image_url="https://web-stu.tkucs.cc/404411240/pic-p.jpg"
                 )
         
