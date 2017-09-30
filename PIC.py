@@ -9,15 +9,18 @@ channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 line_bot_api = LineBotApi(channel_access_token)
 
 def get_reply(event) :
-        os.system("touch test.jpg")
-        os.system("touch test-p.jpg")
+        os.system("touch pic.jpg")
+        os.system("touch pic-p.jpg")
+        os.system("touch pic-o.jpg")
         message_content = line_bot_api.get_message_content(event.message.id)
-        with open('test.jpg', 'wb') as fd:
+        with open('pic.jpg', 'wb') as fd:
             for chunk in message_content.iter_content():
                 fd.write(chunk)
-        img = Image.open('test.jpg')
+        img = Image.open('pic.jpg')
         new_img= img.resize((240, 240),Image.ANTIALIAS)
-        new_img.save('test-p.jpg',quality=100)
+        new_img.save('pic-p.jpg',quality=100)
+        new_img = img.resize((1024, 1024),Image.ANTIALIAS)
+        new_img.save('pic-o.jpg',quality=100)
         server = "cscc.hsexpert.net"
         port = 22
         user = "apie0419"
