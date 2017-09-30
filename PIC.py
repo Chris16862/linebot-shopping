@@ -27,6 +27,7 @@ def get_reply(event) :
         client.connect(server, port, user, password)
         scp = SCPClient(client.get_transport())
         scp.put('test.jpg','public_html/test.jpg')
+        scp.put('test-p.jpg','public_html/test-p.jpg')
         scp.close()
         return ImageSendMessage(
                 original_content_url="https://web-stu.tkucs.cc/404411240/test.jpg",
