@@ -41,7 +41,11 @@ def callback():
         if isinstance(event.message, ImageMessage) :
             line_bot_api.reply_message(
                 event.reply_token,
-                p.get_reply(event)
+                #p.get_reply(event)
+                ImageSendMessage(
+                    original_content_url="http://www.teepr.com/wp-content/uploads/2016/11/115621-Inga.jpg",
+                    preview_image_url="https://stickershop.line-scdn.net/stickershop/v1/product/1254734/LINEStorePC/main@2x.png;compress=true"
+                    )
                 )
         if isinstance(event, JoinEvent) :
             db.execute("INSERT INTO group_list (grid) VALUES (%s)", (event.source.group_id,))
