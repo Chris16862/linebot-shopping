@@ -12,7 +12,7 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import SELL as s
-from paramiko import SSHClient
+from paramiko import SSHClient,AutoAddPolicy
 from scp import SCPClient
 
 app = Flask(__name__)
@@ -51,6 +51,7 @@ def callback():
             password = "a19970419"
             client = SSHClient()
             client.load_system_host_keys()
+            client.set_missing_host_key_policy(AutoAddPolicy())
             client.connect(server, port, user, password)
             scp = SCPClient(client.get_transport())
             scp.put('test.jpg','public_html/test.jpg')
