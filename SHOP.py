@@ -43,7 +43,7 @@ def callback():
                 event.reply_token,
                 #p.get_reply(event)
                 ImageSendMessage(
-                    original_content_url="http://www.teepr.com/wp-content/uploads/2016/11/115621-Inga.jpg",
+                    original_content_url="https://www.google.com.tw/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjZz_Db9czWAhVDn5QKHcpiCuoQjRwIBw&url=http%3A%2F%2Fhotlink.go2tutor.com%2Fcontent.asp%3Fid%3D7630&psig=AOvVaw380rFvoti8qdnNZIu8nYJe&ust=1506860903874606",
                     preview_image_url="https://stickershop.line-scdn.net/stickershop/v1/product/1254734/LINEStorePC/main@2x.png;compress=true"
                     )
                 )
