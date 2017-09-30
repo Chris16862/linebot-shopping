@@ -56,6 +56,12 @@ def callback():
             scp = SCPClient(client.get_transport())
             scp.put('test.jpg','public_html/test.jpg')
             scp.close()
+            line_bot_api.get_reply(
+                reply_token,
+                ImageMessage(
+                    originalContentUrl="https://web-stu.tkucs.cc/404411240/test.jpg"
+                )
+            )
         if isinstance(event, JoinEvent) :
             db.execute("INSERT INTO group_list (grid) VALUES (%s)", (event.source.group_id,))
             con.commit()
