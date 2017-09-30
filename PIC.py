@@ -3,6 +3,9 @@ from scp import SCPClient
 from PIL import Image
 from linebot.models import *
 import os
+from linebot import (
+    LineBotApi
+)
 
 def get_reply(event) :
         os.system("touch test.jpg")
