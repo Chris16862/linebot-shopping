@@ -10,6 +10,7 @@ line_bot_api = LineBotApi(channel_access_token)
 
 def get_reply(event) :
         os.system("touch test.jpg")
+        os.system("touch test-p.jpg")
         message_content = line_bot_api.get_message_content(event.message.id)
         with open('test.jpg', 'wb') as fd:
             for chunk in message_content.iter_content():
