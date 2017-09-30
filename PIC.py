@@ -17,9 +17,9 @@ def get_reply(event) :
             for chunk in message_content.iter_content():
                 fd.write(chunk)
         img = Image.open('pic.jpeg')
-        new_img= img.resize((200, 200),Image.ANTIALIAS)
+        new_img= img.resize((240 160),Image.ANTIALIAS)
         new_img.save('pic-p.jpeg',quality=100)
-        new_img = img.resize((800, 800),Image.ANTIALIAS)
+        new_img = img.resize((1024, 720),Image.ANTIALIAS)
         new_img.save('pic-o.jpeg',quality=100)
         server = "cscc.hsexpert.net"
         port = 22
