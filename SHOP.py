@@ -58,9 +58,9 @@ def callback():
             scp.close()
             line_bot_api.reply_message(
                 event.reply_token,
-                ImageMessage(
-                    originalContentUrl="https://web-stu.tkucs.cc/404411240/test.jpg",
-                    previewImageUrl="https://web-stu.tkucs.cc/404411240/test.jpg"
+                ImageSendMessage(
+                    original_content_url="https://web-stu.tkucs.cc/404411240/test.jpg"
+                    #preview_image_url="https://web-stu.tkucs.cc/404411240/test.jpg"
                 )
             )
         if isinstance(event, JoinEvent) :
