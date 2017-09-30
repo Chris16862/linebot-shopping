@@ -14,9 +14,9 @@ from linebot.models import *
 import SELL as s
 
 app = Flask(__name__)
-#jieba.load_userdict('moe.dict')
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
+
 if channel_secret is None:
     print('Specify LINE_CHANNEL_SECRET as environment variable.')
     sys.exit(1)
@@ -52,13 +52,34 @@ def callback():
         userid = event.source.user_id
         db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
         sell_status = db.fetchall()
-        if event.message.text=="我要賣東西" or sell_status :
+        if event.message.text=="/Sell" or sell_status :
             line_bot_api.reply_message(
                 event.reply_token,
                 s.get_reply(
                     event,
                     sell_status,
                     userid
+                    )
+                )
+        elif event.message.text=="/Buy" :
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(
+                    text="不好意思,此功能尚未開放,敬請期待"
+                    )
+                )
+        elif event.message.text=='/BuyList' :
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(
+                    text="不好意思,此功能尚未開放,敬請期待"
+                    )
+                )
+        elif event.message.text=='/SellList' :
+             line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(
+                    text="不好意思,此功能尚未開放,敬請期待"
                     )
                 )
     return 'OK'
