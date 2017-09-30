@@ -1,6 +1,6 @@
 from paramiko import SSHClient,AutoAddPolicy
 from scp import SCPClient
-import Image
+from PIL import Image
 from linebot.models import *
 
 def get_reply(event) :
