@@ -12,6 +12,8 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import SELL as s
+from paramiko import SSHClient
+from scp import SCPClient
 
 app = Flask(__name__)
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -38,12 +40,21 @@ def callback():
         abort(400)
     for event in events:
         if isinstance(event.message, ImageMessage) :
-            os.system("bash")
             os.system("touch test.jpg")
             message_content = line_bot_api.get_message_content(event.message.id)
             with open('test.jpg', 'wb') as fd:
                 for chunk in message_content.iter_content():
                     fd.write(chunk)
+            server = "cscc.hsexpert.net"
+            port = 22
+            user = "apie0419"
+            password = "a19970419"
+            client = SSHClient()
+            client.load_system_host_keys()
+            client.connect(server, port, user, password)
+            scp = SCPClient(client.get_transport())
+            scp.put('test.jpg','public_html/test.jpg')
+            scp.close()
         if isinstance(event, JoinEvent) :
             db.execute("INSERT INTO group_list (grid) VALUES (%s)", (event.source.group_id,))
             con.commit()
