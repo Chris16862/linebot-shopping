@@ -34,7 +34,7 @@ def get_reply(event) :
         scp.put('pic-p.jpg','public_html/pic-p.jpg')
         scp.close()
         return ImageSendMessage(
-                original_content_url="https://web-stu.tkucs.cc/404411240/pic.jpg",
-                preview_image_url="https://web-stu.tkucs.cc/404411240/pic-p.jpg"
+                original_content_url="https://stu-web.tkucs.cc/404411240/pic.jpg",
+                preview_image_url="https://stu-web.tkucs.cc/404411240/pic-p.jpg"
                 )
         
