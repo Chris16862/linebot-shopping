@@ -59,8 +59,8 @@ def callback():
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
-                    original_content_url="https://web-stu.tkucs.cc/404411240/test.jpg"
-                    #preview_image_url="https://web-stu.tkucs.cc/404411240/test.jpg"
+                    original_content_url="https://web-stu.tkucs.cc/404411240/test.jpg",
+                    preview_image_url="https://web-stu.tkucs.cc/404411240/test.jpg"
                 )
             )
         if isinstance(event, JoinEvent) :
