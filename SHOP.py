@@ -57,7 +57,7 @@ def callback():
             scp.put('test.jpg','public_html/test.jpg')
             scp.close()
             line_bot_api.reply_message(
-                reply_token,
+                event.reply_token,
                 ImageMessage(
                     originalContentUrl="https://web-stu.tkucs.cc/404411240/test.jpg"
                 )
