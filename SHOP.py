@@ -38,6 +38,7 @@ def callback():
         abort(400)
     for event in events:
         if isinstance(event.message, ImageMessage) :
+            os.system("touch test.jpg")
             message_content = line_bot_api.get_message_content(event.message.id)
             with open('test.jpg', 'wb') as fd:
                 for chunk in message_content.iter_content():
