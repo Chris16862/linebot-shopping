@@ -11,8 +11,8 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-import SELL as s
-import PIC as p 
+import sell as s
+import pic as p 
 
 app = Flask(__name__)
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
@@ -38,15 +38,6 @@ def callback():
     except InvalidSignatureError:
         abort(400)
     for event in events:
-        if isinstance(event.message, ImageMessage) :
-            line_bot_api.reply_message(
-                event.reply_token,
-                #p.get_reply(event)
-                ImageSendMessage(
-                    original_content_url="https://www.google.com.tw/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjZz_Db9czWAhVDn5QKHcpiCuoQjRwIBw&url=http%3A%2F%2Fhotlink.go2tutor.com%2Fcontent.asp%3Fid%3D7630&psig=AOvVaw380rFvoti8qdnNZIu8nYJe&ust=1506860903874606",
-                    preview_image_url="https://stickershop.line-scdn.net/stickershop/v1/product/1254734/LINEStorePC/main@2x.png;compress=true"
-                    )
-                )
         if isinstance(event, JoinEvent) :
             db.execute("INSERT INTO group_list (grid) VALUES (%s)", (event.source.group_id,))
             con.commit()
@@ -59,6 +50,15 @@ def callback():
             continue
         if not isinstance(event.source, SourceUser) :
             continue
+        if isinstance(event.message, ImageMessage) :
+            line_bot_api.reply_message(
+                event.reply_token,
+                #p.get_reply(event)
+                ImageSendMessage(
+                    original_content_url="https://www.google.com.tw/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjZz_Db9czWAhVDn5QKHcpiCuoQjRwIBw&url=http%3A%2F%2Fhotlink.go2tutor.com%2Fcontent.asp%3Fid%3D7630&psig=AOvVaw380rFvoti8qdnNZIu8nYJe&ust=1506860903874606",
+                    preview_image_url="https://stickershop.line-scdn.net/stickershop/v1/product/1254734/LINEStorePC/main@2x.png;compress=true"
+                    )
+                )
         userid = event.source.user_id
         db.execute("SELECT status FROM sell_list WHERE status!='finish' and userid='{}'".format(userid))
         sell_status = db.fetchall()
